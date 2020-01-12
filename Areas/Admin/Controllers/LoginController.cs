@@ -20,8 +20,7 @@ namespace WebTinTuc.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Index(string TenDangNhap, string MatKhau)
         {
-            var data = db.TaiKhoans.Where(a => a.TenDangNhap == TenDangNhap && a.MatKhau == MatKhau)
-                            .FirstOrDefault();
+            var data = db.TaiKhoans.Where(a => a.TenDangNhap == TenDangNhap && a.MatKhau == MatKhau && a.Quyen == true).FirstOrDefault();
             if (data != null)
             {
                 string data_account = data.TenDangNhap + "," + data.HoTen + "," + data.Id;

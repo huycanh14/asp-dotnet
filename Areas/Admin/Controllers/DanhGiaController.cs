@@ -16,7 +16,8 @@ namespace WebTinTuc.Areas.Admin.Controllers
             object data = (from cmt in db.DanhGias
                            join tt in db.TinTucs on cmt.IdTinTuc equals tt.Id
                            join tk in db.TaiKhoans on cmt.IdTaiKhoan equals tk.Id
-                           select new
+                           where cmt.IdTinTuc == id
+                           select new DanhGia_TinTuc
                            {
                                Id = cmt.Id,
                                NoiDung = cmt.NoiDung,
@@ -44,6 +45,16 @@ namespace WebTinTuc.Areas.Admin.Controllers
                 return RedirectToAction("/Admin/Index/" + id);
             }
             return View(data);
+        }
+
+        public ActionResult Change(int id)
+        {
+            var data = db.DanhGias.Find(id);
+            data.TrangThai = !data.TrangThai;
+            data.NgaySua = DateTime.Now;
+            db.SaveChanges();
+            ViewBag.Done = "Thay đổi thành công";
+            return RedirectToAction("/Index/" + data.IdTinTuc);
         }
     }
 }

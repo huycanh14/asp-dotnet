@@ -1,4 +1,4 @@
-﻿NoiDung
+﻿
 @{
     ViewData["Title"] = "Bình luận";
     ViewData["TitleHeader"] = "Danh sách bình luận";
@@ -31,7 +31,7 @@
                 @item.NoiDung
             </td>
             <td>
-                @item.HoTen
+                @item.TaiKhoan
             </td>
             <td>
                 @item.NgayTao
@@ -47,6 +47,7 @@
                 }
             </td>
             <td>
+                @Html.ActionLink("Đổi TT", "Change", new { id = item.Id }) | 
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
